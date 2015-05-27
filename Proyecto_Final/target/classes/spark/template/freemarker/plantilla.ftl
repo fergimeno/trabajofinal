@@ -13,7 +13,7 @@
   <ul class="nav">
 
     <li class="active"><a href="/"><i class="icon-th icon-black"></i>Lista</a></li>
-    <li ><a href="/user/create"><i class="icon-plus-sign icon-black"></i>Crear</a></li>
+    <li ><a href="/form"><i class="icon-plus-sign icon-black"></i>Crear</a></li>
 
   </ul>
 </div>

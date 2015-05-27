@@ -11,12 +11,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<tr>
-		<td>Nombre1</td> <td>Autor1</td> <td>Album1</td> <td>Duración1</td> <td>Accion</td>
-	</tr>
-	<tr>
-		<td>Nombre1</td> <td>Autor1</td> <td>Album1</td> <td>Duración1</td> <td>Accion</td>
-	</tr>
+		<#list tracks as track>
+		<tr>
+			<td>${track.nombre}</td> <td>${track.autor}</td> <td>${track.album}</td> <td>${track.duracion}</td>    <td>Accion</td>
+		</tr>
+		</#list>
 	</tbody>
 </table>
 
