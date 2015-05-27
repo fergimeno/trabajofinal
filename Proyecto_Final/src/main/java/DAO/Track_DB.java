@@ -50,10 +50,22 @@ public class Track_DB {
 
         //db.tracks.find().sort({_id:-1}).limit(1);
         Bson sort = new Document("_id", -1);
+        double id;
+        try {
+            id = collection.find().sort(sort).first().getDouble("_id") + 1;
+        } catch (NullPointerException e) {
+            id = 0;
+        }
 
-        double id = collection.find().sort(sort).limit(1).getDouble("_id") + 1;
+        return id;
+    }
 
-        return 
+    public static void eliminar(double id) {
+        MongoClient client = new MongoClient();
+        MongoDatabase database = client.getDatabase("hardwell");
+        MongoCollection<Document> collection = database.getCollection("tracks");
+
+        collection.deleteOne(new Document("_id", id));
     }
 
     private static Track jsonObject(Document doc) {

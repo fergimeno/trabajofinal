@@ -36,7 +36,7 @@ public class App {
 
         post(new FreeMarkerRoute("track/create") {
             @Override
-            public ModelAndView handle(Request request, Response response) {
+            public Object handle(Request request, Response response) {
                 Track t1 = new Track();
                 t1.setId(Track_DB.siguienteId());
                 t1.setNombre(request.queryParams("nombre"));
@@ -44,7 +44,19 @@ public class App {
                 t1.setAlbum(request.queryParams("album"));
                 t1.setDuracion(request.queryParams("duracion"));
                 Track_DB.insertar(t1);
-                return modelAndView(null, "formulario.ftl");
+                response.redirect("/form", 301);
+                return response;
+
+            }
+        });
+
+        get(new FreeMarkerRoute("track/delete/:track_id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                Track_DB.eliminar(Double.parseDouble(request.params("track_id")));
+
+                response.redirect("/", 301);
+                return response;
             }
         });
 
