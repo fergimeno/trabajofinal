@@ -22,9 +22,9 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="inputPassword3" class="col-sm-2 control-label">Duración</label>
+		<label for="inputPassword3" class="col-sm-2 control-label">Link</label>
 		<div class="col-sm-10">
-			<input class="form-control" type="text" name="duracion" value="${track.duracion}">
+			<input class="form-control" type="text" name="link" value="${track.link}">
 		</div>
 
 		<div class="form-group">

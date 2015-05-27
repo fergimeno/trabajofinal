@@ -88,7 +88,7 @@ public class Track_DB {
         track1.setNombre(doc.getString("nombre"));
         track1.setAutor(doc.getString("autor"));
         track1.setAlbum(doc.getString("album"));
-        track1.setDuracion(doc.getString("duracion"));
+        track1.setLink(doc.getString("link"));
         return track1;
     }
 
@@ -97,7 +97,7 @@ public class Track_DB {
                 .append("nombre", track.getNombre())
                 .append("autor", track.getAutor())
                 .append("album", track.getAlbum())
-                .append("duracion", track.getDuracion());
+                .append("link", track.getLink());
     }
 
 }

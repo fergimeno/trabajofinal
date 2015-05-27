@@ -42,7 +42,7 @@ public class App {
                 t1.setNombre(request.queryParams("nombre"));
                 t1.setAutor(request.queryParams("autor"));
                 t1.setAlbum(request.queryParams("album"));
-                t1.setDuracion(request.queryParams("duracion"));
+                t1.setLink(request.queryParams("link"));
                 Track_DB.insertar(t1);
                 response.redirect("/form", 301);
                 return response;
@@ -68,7 +68,7 @@ public class App {
                 t1.setNombre(request.queryParams("nombre"));
                 t1.setAutor(request.queryParams("autor"));
                 t1.setAlbum(request.queryParams("album"));
-                t1.setDuracion(request.queryParams("duracion"));
+                t1.setLink(request.queryParams("link"));
                 Track_DB.editar(t1);
 
                 response.redirect("/", 301);

@@ -15,17 +15,17 @@ public class Track {
     private String nombre;
     private String autor;
     private String album;
-    private String duracion;
+    private String link;
 
     public Track() {
 
     }
 
-    public Track(String nombre, String autor, String album, String duracion) {
+    public Track(String nombre, String autor, String album, String link) {
         this.nombre = nombre;
         this.autor = autor;
         this.album = album;
-        this.duracion = duracion;
+        this.link = link;
     }
 
     public double getId() {
@@ -79,17 +79,17 @@ public class Track {
     }
 
     /**
-     * @return the duracion
+     * @return the link
      */
-    public String getDuracion() {
-        return duracion;
+    public String getLink() {
+        return link;
     }
 
     /**
-     * @param duracion the duracion to set
+     * @param link the link to set
      */
-    public void setDuracion(String duracion) {
-        this.duracion = duracion;
+    public void setLink(String link) {
+        this.link = link;
     }
 
 }
