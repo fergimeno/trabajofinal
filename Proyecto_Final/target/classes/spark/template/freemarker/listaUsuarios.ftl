@@ -15,7 +15,9 @@
 		<tr>
 			<td>${track.nombre}</td> <td>${track.autor}</td> <td>${track.album}</td> <td>${track.duracion}</td>    
 			<td>
-			  <a href="track/delete/${track.id}" class="btn btn-default btn-xs">Borrar</a>  <a href="#" class="btn btn-default btn-xs">Editar</a></td>
+			  <a href="track/delete/${track.id}" class="btn btn-default btn-xs">Borrar</a>  
+			  <a href="edit/${track.id}" class="btn btn-default btn-xs">Editar</a>
+			</td>
 		</tr>
 		</#list>
 	</tbody>

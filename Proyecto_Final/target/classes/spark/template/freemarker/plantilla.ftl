@@ -1,5 +1,6 @@
 <#macro page_head>
-<title>Base Template</title>
+<title>Hardwell - Tracklist</title>
+<link rel="icon" type="image/gif" href="/images/favicon.gif" />
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="/css/styles.css">
 </#macro>

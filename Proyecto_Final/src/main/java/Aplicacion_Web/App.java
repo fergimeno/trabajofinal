@@ -60,10 +60,34 @@ public class App {
             }
         });
 
+        post(new FreeMarkerRoute("edit/track/edit/:track_id") {
+            @Override
+            public Object handle(Request request, Response response) {
+                Track t1 = new Track();
+                t1.setId(Double.parseDouble(request.params("track_id")));
+                t1.setNombre(request.queryParams("nombre"));
+                t1.setAutor(request.queryParams("autor"));
+                t1.setAlbum(request.queryParams("album"));
+                t1.setDuracion(request.queryParams("duracion"));
+                Track_DB.editar(t1);
+
+                response.redirect("/", 301);
+                return response;
+            }
+        });
+
         get(new FreeMarkerRoute("/form") {
             @Override
             public ModelAndView handle(Request request, Response response) {
                 return modelAndView(null, "formulario.ftl");
+            }
+        });
+
+        get(new FreeMarkerRoute("/edit/:track_id") {
+            @Override
+            public ModelAndView handle(Request request, Response response) {
+                data.put("track", Track_DB.buscar(Double.parseDouble(request.params("track_id"))));
+                return modelAndView(data, "edit.ftl");
             }
         });
 

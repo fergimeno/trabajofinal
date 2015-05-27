@@ -8,6 +8,7 @@ package DAO;
 import Entidad.Track;
 import com.mongodb.*;
 import com.mongodb.client.*;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -19,53 +20,66 @@ import org.bson.conversions.Bson;
 public class Track_DB {
 
     public static ArrayList<Track> listar() {
-        MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("hardwell");
-        MongoCollection<Document> collection = database.getCollection("tracks");
-
+        Conexion.open();
         ArrayList<Track> tracks = new ArrayList();
 
-        MongoCursor<Document> cursor = collection.find().iterator();
+        MongoCursor<Document> cursor = Conexion.getCollection().find().iterator();
 
         while (cursor.hasNext()) {
             tracks.add(jsonObject(cursor.next()));
         }
-        client.close();
+
+        Conexion.close();
         return tracks;
     }
 
     public static void insertar(Track track) {
-        MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("hardwell");
-        MongoCollection<Document> collection = database.getCollection("tracks");
+        Conexion.open();
 
-        collection.insertOne(objectJson(track));
-        client.close();
+        Conexion.getCollection().insertOne(objectJson(track));
+        Conexion.close();
     }
 
     public static double siguienteId() {
-        MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("hardwell");
-        MongoCollection<Document> collection = database.getCollection("tracks");
+        Conexion.open();
 
         //db.tracks.find().sort({_id:-1}).limit(1);
         Bson sort = new Document("_id", -1);
         double id;
         try {
-            id = collection.find().sort(sort).first().getDouble("_id") + 1;
+            id = Conexion.getCollection().find().sort(sort).first().getDouble("_id") + 1;
         } catch (NullPointerException e) {
             id = 0;
         }
+
+        Conexion.close();
 
         return id;
     }
 
     public static void eliminar(double id) {
-        MongoClient client = new MongoClient();
-        MongoDatabase database = client.getDatabase("hardwell");
-        MongoCollection<Document> collection = database.getCollection("tracks");
+        Conexion.open();
 
-        collection.deleteOne(new Document("_id", id));
+        Conexion.getCollection().deleteOne(new Document("_id", id));
+
+        Conexion.close();
+    }
+
+    public static Track buscar(double id) {
+        Conexion.open();
+        Bson filter = new Document("_id", id);
+
+        Track t = jsonObject(Conexion.getCollection().find(filter).first());
+        Conexion.close();
+
+        return t;
+    }
+
+    public static void editar(Track track) {
+        Conexion.open();
+
+        Conexion.getCollection().replaceOne(eq("_id", track.getId()), objectJson(track));
+        Conexion.close();
     }
 
     private static Track jsonObject(Document doc) {

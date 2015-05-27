@@ -3,6 +3,11 @@ body {
 	padding-top: 20px;
 	padding-bottom: 60px;
 	background-image: URL('http://apfelblog.ch/wp-content/uploads/1053505_10151753986706694_1159617225_o.jpg');
+	 background-attachment: fixed;
+	     -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .header {
@@ -14,13 +19,17 @@ body {
 }
 
 .footer{
+	text-align: center;
+width:100%;
+	color: #FFD2CB;
+	margin: 0 auto;
 
 }
 
 .form-horizontal{
-width: 75%;
-margin: 0 auto;
-color:white;
+	width: 75%;
+	margin: 0 auto;
+	color:white;
 }
 
 .table {
@@ -33,26 +42,30 @@ color:white;
 }
 
 .navbar .nav {
-	margin: 0;
+	margin: 0 auto;
 	display: table;
 	width: 100%;
 }
 .navbar .nav li {
 	display: table-cell;
 	width: 1%;
+	margin: 0 auto;
 	float: none;
 }
 .navbar .nav li a {
 	font-weight: bold;
+	margin: 0 auto;
 	text-align: center;
 	border-left: 1px solid rgba(255,255,255,.75);
 	border-right: 1px solid rgba(0,0,0,.1);
 }
 .navbar .nav li:first-child a {
 	border-left: 0;
+	margin: 0 auto;
 	border-radius: 3px 0 0 3px;
 }
 .navbar .nav li:last-child a {
 	border-right: 0;
+	margin: 0 auto;
 	border-radius: 0 3px 3px 0;
 }

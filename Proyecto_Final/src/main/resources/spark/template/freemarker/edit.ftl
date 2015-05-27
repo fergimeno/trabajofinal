@@ -2,7 +2,7 @@
 
 <#macro content>
 
-<form class="form-horizontal" name="track" action="track/create" method="post">
+<form class="form-horizontal" name="track" action="track/edit/${track.id}" method="post">
 	<div class="form-group">
 		<label for="inputEmail3" class="col-sm-2 control-label">Nombre</label>
 		<div class="col-sm-10">
