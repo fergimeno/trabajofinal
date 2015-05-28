@@ -23,9 +23,6 @@ import static spark.Spark.setPort;
  */
 public class Conexion {
 
-    private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
-    private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 8080;
-
     private static MongoClient client;
     private static MongoDatabase database;
     private static MongoCollection<Document> collection;
@@ -34,15 +31,7 @@ public class Conexion {
         return collection;
     }
 
-    public Conexion() throws Exception {
-        init();
-    }
-
-    public static void init() throws Exception {
-        setIpAddress(IP_ADDRESS);
-        setPort(PORT);
-    }
-
+    
     public static void open() {
 
         String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
