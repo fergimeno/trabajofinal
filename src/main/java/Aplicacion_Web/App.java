@@ -24,7 +24,14 @@ public class App {
 
     public static void main(String[] args) {
         final Map<String, Object> data = new HashMap<>();
+        
+        private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
+        private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 4567;
+
         Spark.staticFileLocation("/public");
+
+        setIpAddress(IP_ADDRESS);
+        setPort(PORT);
 
         get(new FreeMarkerRoute("/") {
             @Override
