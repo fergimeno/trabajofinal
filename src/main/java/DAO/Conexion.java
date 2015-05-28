@@ -6,15 +6,25 @@
 package DAO;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.util.Arrays;
 import org.bson.Document;
+import static spark.Spark.setIpAddress;
+import static spark.Spark.setPort;
 
 /**
  *
  * @author fer
  */
 public class Conexion {
+
+    private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
+    private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 8080;
 
     private static MongoClient client;
     private static MongoDatabase database;
@@ -24,10 +34,49 @@ public class Conexion {
         return collection;
     }
 
+    public Conexion() throws Exception {
+        init();
+    }
+
+    public static void init() throws Exception {
+        setIpAddress(IP_ADDRESS);
+        setPort(PORT);
+    }
+
     public static void open() {
-        client = new MongoClient();
-        database = client.getDatabase("hardwell");
-        collection = database.getCollection("tracks");
+
+        String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
+        if (host == null) {
+            client = new MongoClient("localhost");
+            database = client.getDatabase("hardwell");
+            collection = database.getCollection("tracks");
+        } else {
+
+            int port = Integer.parseInt(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
+            //String dbname = System.getenv("OPENSHIFT_APP_NAME");
+            String username = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
+            String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
+            
+            MongoCredential credential = MongoCredential.createCredential(
+                    username, "hardwell", password.toCharArray());
+            
+            //MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
+            //client = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
+            
+            MongoClient mongoClient = new MongoClient(
+                    new ServerAddress(host, port),
+                    Arrays.asList(credential)
+            );
+            
+            client.setWriteConcern(WriteConcern.SAFE);
+            database = client.getDatabase("hardwell");          
+            
+            
+            
+            
+            collection = database.getCollection("tracks");
+        }
+
     }
 
     public static void close() {
