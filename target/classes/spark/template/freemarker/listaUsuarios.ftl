@@ -13,7 +13,7 @@
 	<tbody>
 		<#list tracks as track>
 		<tr>
-			<td>${track.nombre}</td> <td>${track.autor}</td> <td>${track.album}</td> <td><a href="/${track.link}" target="_blank">Escuchar</a></td>    
+			<td>${track.nombre}</td> <td>${track.autor}</td> <td>${track.album}</td> <td><a href="${track.link}" target="_blank">Escuchar</a></td>    
 			<td>
 			  <a href="track/delete/${track.id}" class="btn btn-default btn-xs">Borrar</a>  
 			  <a href="edit/${track.id}" class="btn btn-default btn-xs">Editar</a>
