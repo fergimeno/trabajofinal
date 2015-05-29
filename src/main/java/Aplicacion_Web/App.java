@@ -2,15 +2,9 @@ package Aplicacion_Web;
 
 import DAO.Track_DB;
 import Entidad.Track;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 import java.util.*;
-import static java.util.Arrays.asList;
-import org.bson.Document;
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerRoute;
 import spark.ModelAndView;
@@ -21,19 +15,15 @@ import spark.Spark;
  *
  */
 public class App {
+        private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
+        private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 4567;
 
     public static void main(String[] args) {
-        final Map<String, Object> data = new HashMap<>();
-
-        final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
-        final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 4567;
-
-        Spark.staticFileLocation(
-                "/public");
 
         setIpAddress(IP_ADDRESS);
-
         setPort(PORT);
+        Spark.staticFileLocation("/public");
+        final Map<String, Object> data = new HashMap<>();
 
         get(
                 new FreeMarkerRoute("/") {
