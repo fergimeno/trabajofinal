@@ -44,7 +44,7 @@ public class Conexion {
             String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
             
             MongoCredential credential = MongoCredential.createCredential(
-                    username, "hardwell", password.toCharArray());
+                    username, "admin", password.toCharArray());
             
             MongoClient client = new MongoClient(
                     new ServerAddress(host, port),
