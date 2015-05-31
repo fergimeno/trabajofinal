@@ -6,7 +6,6 @@
 package DAO;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
@@ -14,8 +13,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.util.Arrays;
 import org.bson.Document;
-import static spark.Spark.setIpAddress;
-import static spark.Spark.setPort;
 
 /**
  *
@@ -36,7 +33,7 @@ public class Conexion {
 
         String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
         if (host == null) {
-            client = new MongoClient("localhost");
+            client = new MongoClient();
             database = client.getDatabase("hardwell");
             collection = database.getCollection("tracks");
         } else {
@@ -47,21 +44,15 @@ public class Conexion {
             String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
             
             MongoCredential credential = MongoCredential.createCredential(
-                    username, "hardwell", password.toCharArray());
+                    username, "admin", password.toCharArray());
             
-            //MongoClientOptions mongoClientOptions = MongoClientOptions.builder().build();
-            //client = new MongoClient(new ServerAddress(host, port), mongoClientOptions);
-            
-            MongoClient mongoClient = new MongoClient(
+            MongoClient client = new MongoClient(
                     new ServerAddress(host, port),
                     Arrays.asList(credential)
             );
             
             client.setWriteConcern(WriteConcern.SAFE);
             database = client.getDatabase("hardwell");          
-            
-            
-            
             
             collection = database.getCollection("tracks");
         }
