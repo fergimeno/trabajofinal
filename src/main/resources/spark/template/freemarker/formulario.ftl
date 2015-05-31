@@ -32,7 +32,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-default">A&ntildeadir</button>
+			<button type="submit" class="btn btn-default">Crear</button>
 		</div>
 	</div>
 </form>
