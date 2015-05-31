@@ -41,7 +41,7 @@
 
 
    <div class="footer">
-    <p>Página creada por Fer</p>
+    <p>P&aacutegina creada por Fer</p>
   </div>
 
 </body>
